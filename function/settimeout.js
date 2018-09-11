@@ -24,4 +24,14 @@ const fnVarWithClosure = ()=>{
   }
 }
 
-fnVarWithClosure()
+// fnVarWithClosure()
+
+const fnVar123 = ()=>{
+  let i=0
+  for( i=0; i<12; i++ ) {
+    setTimeout(function timer() {
+      console.log(i)
+    },i*1000)
+  }
+}
+fnVar123()
