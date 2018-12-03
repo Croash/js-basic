@@ -12,18 +12,26 @@ function PromiseInit(fn) {
     })
   }
 
+  // 用于处理promise.then中的回调
+  // 1. 如果还在pending状态，就把cb暂存如cbarr数组中 当然这条暂时可以忽略
+  // 2. 如果非pending状态
+
   const promiseHandle = (cb)=>{
     if( state==='pending') {
       console.log(state)
       cbArr.push(cb)
       return;
     }
+
+    // 当then内传空时，执行下列内容
     if(!cb.onFulfilled) {
       cb.onFulfilled(val)
-      console.log('ful')
+      console.log('ful',cb.onFulfilled)
       return
     }
 
+
+    // then内不为空，执行then内回调，改变当前promise的状态（state和val，即状态值和val值）
     const ret = cb.onFulfilled(val)
     console.log(ret)
     // resolve.call(cb,ret)
@@ -35,7 +43,7 @@ function PromiseInit(fn) {
     // resolve promise
     /// 不舒服 略空的一个地方
     // 判断是否newval是否为promise， 是则将当前环境直接注入进去（其实是这么个意思）
-    if(newVal instanceof Object && newVal.then && newVal.then instanceof Function) {
+    if(newVal instanceof PromiseInit && newVal.then && newVal.then instanceof Function) {
       const then = newVal.then
       // then.call(newVal, resolve)
       newVal.then(resolve)
@@ -44,7 +52,6 @@ function PromiseInit(fn) {
 
     val = newVal
     state = 'fulfilled'
-    console.log(state)
     setTimeout(
       ()=>{
         cbArr.forEach(function (cb) {
@@ -59,10 +66,10 @@ function PromiseInit(fn) {
 
 let testPromiseInit = new PromiseInit((resolve)=>{
 
-  // let input = new PromiseInit((resolve)=>{
-  //   resolve(222)
-  // })
-  resolve(222)
+  let input = new PromiseInit((resolve)=>{
+    resolve(222)
+  })
+  resolve(input)
 
 })
 .then((val)=>{
@@ -73,5 +80,6 @@ let testPromiseInit = new PromiseInit((resolve)=>{
   console.log('qq',val)
   return 2510
 })
+.then()
 
 
