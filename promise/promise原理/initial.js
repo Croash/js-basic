@@ -64,22 +64,4 @@ function PromiseInit(fn) {
   fn(resolve)
 }
 
-let testPromiseInit = new PromiseInit((resolve)=>{
-
-  let input = new PromiseInit((resolve)=>{
-    resolve(222)
-  })
-  resolve(input)
-
-})
-.then((val)=>{
-  console.log('qq',val)
-  return 25011
-})
-.then((val)=>{
-  console.log('qq',val)
-  return 2510
-})
-.then()
-
-
+module.exports = PromiseInit
