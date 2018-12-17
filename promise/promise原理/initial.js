@@ -24,12 +24,12 @@ function PromiseInit(fn) {
     }
 
     // 当then内传空时，执行下列内容
-    if(!cb.onFulfilled) {
-      cb.onFulfilled(val)
-      console.log('ful',cb.onFulfilled)
+    if(!cb.onFulfilled) { 
+      console.log('val',val)
+      cb.resolve(val)
+
       return
     }
-
 
     // then内不为空，执行then内回调，改变当前promise的状态（state和val，即状态值和val值）
     const ret = cb.onFulfilled(val)
@@ -38,8 +38,9 @@ function PromiseInit(fn) {
     cb.resolve(ret)
   }
 
-
   const resolve = function (newVal) {
+    console.log('new',newVal)
+
     // resolve promise
     /// 不舒服 略空的一个地方
     // 判断是否newval是否为promise， 是则将当前环境直接注入进去（其实是这么个意思）

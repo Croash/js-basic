@@ -18,10 +18,10 @@ let testPromiseInit = new PromiseInit((resolve)=>{
   return val+1
 })
 
-testPromiseInit
-.then((val)=>{
-  console.log('initval',val)
-  return val
-})
 
-console.log(testPromiseInit)
+testPromiseInit
+  .then()
+  .then((val)=>{
+    console.log('qq',val+1)
+    return val+1
+  })
