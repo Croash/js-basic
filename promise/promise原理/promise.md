@@ -55,3 +55,5 @@ promise 其实还是很简单的一套东西（当然是看了别人的实现以
 至于race,all,wait,always，都不过是promise的语法糖罢了。（虽然promise本身就是js的语法糖，哎，糖中糖，甜坏牙）
 
 最后感谢: [过test的promise](https://github.com/bruce-xu/Promise) (简版的那个忘记从哪里找到的了。。。百度一下就ok)
+
+然后还顺带明白了事件循环到底是tm怎么循环的（异步真的全tm是用setTimeout最后处理出来的咩，这个是个疑问）
